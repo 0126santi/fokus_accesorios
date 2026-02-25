@@ -12,18 +12,15 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), system-ui, -apple-system, 'Segoe UI', Arial, sans-serif;
+  min-height: 100vh;
 }
 
-body {
-  background: #fff;
-  color: var(--foreground);
-  font-family: 'Inter', Arial, Helvetica, sans-serif;
-  min-height: 100vh;
+.font-instrument {
+  font-family: var(--font-instrument), system-ui, -apple-system, 'Segoe UI', Arial, sans-serif;
 }
 
 /* Frosted glass efecto neutro */

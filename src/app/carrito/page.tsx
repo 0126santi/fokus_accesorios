@@ -1,7 +1,6 @@
 "use client";
 import { useEffect, useState } from 'react';
 import { getCart, removeFromCart, updateCartQuantity, clearCart, CartItem } from '../../lib/cart';
-import { SaleItem } from '@/lib/salesApi';
 import Image from 'next/image';
 
 export default function CarritoPage() {
@@ -36,9 +35,9 @@ export default function CarritoPage() {
               <thead>
                 <tr className="text-xs font-bold text-neutral-700 border-b">
                   <th className="pb-2 px-2 w-2/5">PRODUCTO</th>
-                  <th className="pb-2 px-2 w-1/5">PRECIO</th>
-                  <th className="pb-2 px-2 w-1/5">CANTIDAD</th>
-                  <th className="pb-2 px-2 w-1/5">SUBTOTAL</th>
+                  <th className="pb-2 px-2 w-1/5 text-center">PRECIO</th>
+                  <th className="pb-2 px-2 w-1/5 text-center">CANTIDAD</th>
+                  <th className="pb-2 px-2 w-1/5 text-center">SUBTOTAL</th>
                 </tr>
               </thead>
               <tbody>
@@ -51,8 +50,8 @@ export default function CarritoPage() {
                       <span className="font-medium text-neutral-900 text-sm whitespace-pre-line">{item.name}</span>
                     </td>
                     {/* Desktop/tablet cells */}
-                    <td className="hidden sm:table-cell font-semibold text-neutral-900 text-center sm:text-left sm:align-middle align-top sm:py-0 py-2 sm:mb-0 mb-3 pr-12 sm:pr-0">
-                      <div className="block sm:inline mb-2 sm:mb-0">{item.price.toFixed(2)}</div>
+                    <td className="hidden sm:table-cell font-semibold text-neutral-900 text-center align-middle px-2 py-2 whitespace-nowrap">
+                      <div className="mb-0">{item.price.toFixed(2)}</div>
                     </td>
                     <td className="hidden sm:table-cell sm:align-middle align-top sm:py-0 py-2 sm:mb-0 mb-3">
                       <div className="block sm:inline mb-2 sm:mb-0">
@@ -63,8 +62,8 @@ export default function CarritoPage() {
                         </div>
                       </div>
                     </td>
-                    <td className="hidden sm:table-cell font-semibold text-neutral-900 text-center sm:text-left sm:align-middle align-top sm:py-0 py-2 sm:mb-0 mb-3 pr-12 sm:pr-0">
-                      <div className="block sm:inline mb-2 sm:mb-0 mt-2 sm:mt-0">{(item.price * item.quantity).toFixed(2)}</div>
+                    <td className="hidden sm:table-cell font-semibold text-neutral-900 text-center align-middle px-2 py-2 whitespace-nowrap">
+                      <div className="mb-0">{(item.price * item.quantity).toFixed(2)}</div>
                     </td>
 
                     {/* Mobile layout: price, qty, subtotal in a single row to avoid overlap */}
@@ -87,12 +86,12 @@ export default function CarritoPage() {
                   <button
                     onClick={() => window.location.href = '/'}
                     className="px-6 py-2 rounded font-medium transition"
-                    style={{ background: '#E96400', color: '#ffffff' }}
+                    style={{ background: '#000000', color: '#ffffff' }}
                   >← SEGUIR COMPRANDO</button>
                   <button
                     onClick={() => { clearCart(); setCart([]); }}
                     className="px-6 py-2 rounded font-medium transition"
-                    style={{ background: '#FFCF71', color: '#ffffff' }}
+                    style={{ background: '#000000', color: '#ffffff' }}
                   >Vaciar carrito</button>
             </div>
           </div>
@@ -110,35 +109,12 @@ export default function CarritoPage() {
             </div>
             <button
               className="mt-4 px-6 py-3 rounded font-medium transition"
-              style={{ background: '#E96400', color: '#ffffff' }}
+              style={{ background: '#000000', color: '#ffffff' }}
               onClick={() => {
                 if (!cart || cart.length === 0) return;
-                const numeroWhatsapp = '584145976816';
-                // Prepare sale payload (B: create pending sale in DB before opening WhatsApp)
-                const items: SaleItem[] = cart.map(p => ({
-                  id: p.id,
-                  name: p.name,
-                  price: p.price,
-                  codigo: p.codigo ?? '',
-                  costo: p.costo ?? null,
-                  quantity: p.quantity
-                }));
-                const payload = { items, subtotal, total: subtotal, buyer_phone: null, buyer_user_id: null };
-
-                // Fire-and-forget: post to server-side API that uses the service role key to insert safely
-                fetch('/api/sales', {
-                  method: 'POST',
-                  headers: { 'Content-Type': 'application/json' },
-                  body: JSON.stringify(payload),
-                }).then(async (res) => {
-                  if (!res.ok) {
-                    const body = await res.json().catch(() => ({}));
-                    console.error('Create sale failed', body.error || res.statusText);
-                  }
-                }).catch(err => console.error('Network error creating sale', err));
-
+                const numeroWhatsapp = '584244446227';
                 const mensaje = encodeURIComponent(
-                  "Hola, quiero comprar:\n" +
+                  "Hola le escribo desde la pagina web, quiero comprar:\n" +
                   cart.map(p => `- ${p.name} (${p.quantity} unidades) - ${ (p.price * p.quantity).toFixed(2) }`).join('\n') +
                   `\nTotal: ${ subtotal.toFixed(2) }`
                 );

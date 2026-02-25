@@ -11,6 +11,7 @@ export type Product = {
   image: string;
   category: string;
   user_id?: string;
+  soldOut?: boolean;
 };
 
 // Ejemplo de productos iniciales (pueden ser reemplazados por el admin)

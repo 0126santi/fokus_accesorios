@@ -4,7 +4,6 @@ export type SaleItem = {
   id: string;
   name: string;
   price: number;
-  codigo?: string;
   costo?: number | null;
   quantity: number;
 };

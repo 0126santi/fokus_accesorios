@@ -8,13 +8,13 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        background: '#f6f8fa', // gris azulado muy claro
-        foreground: '#1a202c', // gris oscuro frío
-        primary: '#3b82f6',    // azul frío
-        secondary: '#64748b',  // gris azulado
-        accent: '#38bdf8',     // celeste frío
-        card: '#e5eaf1',       // gris azulado claro
-        muted: '#cbd5e1',      // gris frío
+        background: '#ffffff', // white
+        foreground: '#000000', // black
+        primary: '#000000',    // black
+        secondary: '#ffffff',  // white
+        accent: '#333333',     // dark gray
+        card: '#f5f5f5',       // light gray
+        muted: '#cccccc',      // gray
       },
       fontFamily: {
         sans: ['Inter', 'ui-sans-serif', 'system-ui'],

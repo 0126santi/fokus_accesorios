@@ -1,5 +1,4 @@
-
-Tecnomadera — E-commerce (Next.js + Supabase)
+Fokus accesorios (Next.js + Supabase)
 
 Resumen
 - Catálogo de productos por categorías, carrito y finalización vía WhatsApp.
@@ -9,7 +8,7 @@ Resumen
 Características
 - Navegación por categorías: `src/data/categories.ts` y rutas dinámicas.
 - Carrito y envío a WhatsApp: `src/app/carrito/page.tsx`.
-- Admin: gestionar productos y ventas, reordenamiento drag-and-drop y búsqueda: `src/app/admin/page.tsx`.
+- Admin: gestionar productos y ventas, reordenamiento drag-and-drop y búsqueda: `src/app/gestion/page.tsx`.
 - API cliente: Supabase (`src/lib/supabaseClient.ts`), productos (`src/lib/productsApi.ts`).
 - Estilos: Tailwind CSS (v4), PostCSS plugin oficial.
 
@@ -65,26 +64,4 @@ FROM numbered n
 WHERE p.id = n.id;
 ```
 
-Despliegue
-- Ver `DEPLOYMENT.md` para guía (Railway). En Vercel, añade las mismas env vars.
-
-Estructura
-- `src/app/*`: páginas Next (app router)
-- `src/components/*`: componentes UI (ProductCard, Header, PromoToast, Portal, etc.)
-- `src/lib/*`: clientes y APIs (Supabase, productos, carrito)
-- `src/data/*`: datos estáticos (categorías)
-
-Limpieza y seguridad
-- `.gitignore` ignora `.env*`. No subas `.env.local` al repo.
-- Si `.env.local` ya fue añadido al git, elimínalo del índice:
-```pwsh
-git rm --cached .env.local
-git commit -m "Remove .env.local from repo"
-```
-
-Notas de configuración
-- Existe `next.config.js`. Si prefieres TypeScript, traslada la config a `next.config.ts` y elimina el archivo `.js` para evitar duplicados. Actualmente la configuración de imágenes y `reactStrictMode` está contemplada.
-
-Licencia
-- Uso personal/portafolio. Añade una licencia si piensas open source público.
 

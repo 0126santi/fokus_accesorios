@@ -34,14 +34,13 @@ export default function SearchBar({ value, onChange, onSelect, autoFocus }: { va
     onChange('');
     if (onSelect) {
       onSelect(product);
-      return;
     }
     // Redirige a la categoría y desplaza al producto
-    router.push(`/categoria/${product.category}?producto=${product.id}`);
+    router.push(`/categoria/${product.category}#product-${product.id}`);
   };
 
   return (
-    <div className="relative w-full max-w-xs">
+    <div className="relative w-72 max-w-none">
       <input
         type="text"
         placeholder="Buscar productos..."

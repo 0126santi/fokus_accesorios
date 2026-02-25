@@ -19,6 +19,19 @@ export default function Sidebar({ open, onClose }: { open: boolean; onClose: () 
             {idx < categories.length - 1 && <hr className="border-t border-gray-200 my-0" />}
           </React.Fragment>
         ))}
+
+        <hr className="border-t border-gray-200 my-2" />
+        <li className="pt-2 pb-1 text-sm font-semibold uppercase tracking-wide text-gray-500">Redes sociales</li>
+        <li>
+          <a
+            href="https://www.instagram.com/fokus_accesorios?igsh=MWRwNHZha2YweHlveA=="
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-gray-700 hover:text-black font-medium block py-2"
+          >
+            Instagram
+          </a>
+        </li>
       </ul>
     </aside>
   );
