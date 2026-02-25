@@ -4,13 +4,13 @@ import { categories } from '../data/categories';
 
 export default function Navbar() {
   return (
-    <nav className="flex items-center justify-center py-2 px-4 sm:px-8 border-b w-full bg-white">
-      <div className="flex items-center gap-6 text-sm font-medium">
-        <Link href="/" className="py-2 px-3 rounded-md hover:bg-gray-100">
+    <nav className="w-full border-b bg-white overflow-x-auto">
+      <div className="mx-auto flex min-w-max items-center gap-2 px-2 py-2 sm:gap-6 sm:px-8 text-xs sm:text-sm font-medium whitespace-nowrap">
+        <Link href="/" className="py-2 px-2 sm:px-3 rounded-md hover:bg-gray-100">
           TODO
         </Link>
         {categories.map(category => (
-          <Link key={category.key} href={`/categoria/${category.key}`} className="py-2 px-3 rounded-md hover:bg-gray-100">
+          <Link key={category.key} href={`/categoria/${category.key}`} className="py-2 px-2 sm:px-3 rounded-md hover:bg-gray-100">
             {category.name.toUpperCase()}
           </Link>
         ))}

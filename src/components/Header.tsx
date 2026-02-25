@@ -51,9 +51,9 @@ export default function Header() {
   return (
     <>
       <header 
-        className={`fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-4 sm:px-8 py-2 border-b border-white/10 w-full bg-black transition-transform duration-300 ${visible ? 'translate-y-0' : '-translate-y-full'}`}
+        className={`fixed top-0 left-0 right-0 z-50 flex h-14 sm:h-16 items-center justify-between px-2 sm:px-6 border-b border-white/10 w-full bg-black transition-transform duration-300 ${visible ? 'translate-y-0' : '-translate-y-full'}`}
       >
-        <div className="flex items-center gap-4">
+        <div className="relative z-10 flex items-center gap-2 sm:gap-4">
           <button
             className="p-2 rounded-md text-white hover:bg-white/10"
             onClick={() => setSidebarOpen(true)}
@@ -62,13 +62,16 @@ export default function Header() {
             <span className="text-2xl">☰</span>
           </button>
         </div>
-        <div className="absolute left-1/2 -translate-x-1/2">
-          <Link href="/" className="flex items-center gap-2 text-2xl font-bold tracking-tighter text-white" style={{ fontFamily: 'monospace' }}>
-            <Image src="/logo.jpg" alt="Logo Fokus Accesorios" width={48} height={48} className="rounded-sm object-cover" priority />
-            FOKUS ACCESORIOS
+        <div className="absolute inset-x-0 flex justify-center px-14 sm:px-24">
+          <Link href="/" className="pointer-events-auto flex max-w-full items-center gap-2 truncate text-white" style={{ fontFamily: 'monospace' }}>
+            <Image src="/logo.jpg" alt="Logo Fokus Accesorios" width={34} height={34} className="rounded-sm object-cover sm:h-12 sm:w-12" priority />
+            <span className="truncate text-base font-bold tracking-tight sm:text-2xl">
+              <span className="sm:hidden">FOKUS</span>
+              <span className="hidden sm:inline">FOKUS ACCESORIOS</span>
+            </span>
           </Link>
         </div>
-        <div className="flex items-center gap-4">
+        <div className="relative z-10 flex items-center gap-2 sm:gap-4">
           <div className="relative" ref={searchRef}>
             <button
               className="p-2 rounded-md text-white hover:bg-white/10"
@@ -96,7 +99,7 @@ export default function Header() {
           </Link>
         </div>
       </header>
-      <div className="pt-16"></div> {/* Add padding to the top of the content to avoid being overlapped by the fixed header */}
+      <div className="pt-14 sm:pt-16"></div> {/* Add padding to the top of the content to avoid being overlapped by the fixed header */}
       <Sidebar open={sidebarOpen} onClose={() => setSidebarOpen(false)} />
     </>
   );

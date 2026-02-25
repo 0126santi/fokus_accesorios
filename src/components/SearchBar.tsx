@@ -40,7 +40,7 @@ export default function SearchBar({ value, onChange, onSelect, autoFocus }: { va
   };
 
   return (
-    <div className="relative w-72 max-w-none">
+    <div className="relative w-[min(18rem,calc(100vw-4rem))] sm:w-72">
       <input
         type="text"
         placeholder="Buscar productos..."
