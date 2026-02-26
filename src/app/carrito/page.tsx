@@ -112,7 +112,7 @@ export default function CarritoPage() {
               style={{ background: '#000000', color: '#ffffff' }}
               onClick={() => {
                 if (!cart || cart.length === 0) return;
-                const numeroWhatsapp = '584244446227';
+                const numeroWhatsapp = '584243005733';
                 const mensaje = encodeURIComponent(
                   "Hola le escribo desde la pagina web, quiero comprar:\n" +
                   cart.map(p => `- ${p.name} (${p.quantity} unidades) - ${ (p.price * p.quantity).toFixed(2) }`).join('\n') +
