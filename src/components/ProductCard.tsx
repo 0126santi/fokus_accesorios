@@ -1,6 +1,7 @@
 "use client";
 import { Product } from '../data/products';
 import { addToCart } from '../lib/cart';
+import { formatCurrency } from '../lib/currency';
 import Image from 'next/image';
 import { useState, useEffect } from 'react';
 import Portal from './Portal';
@@ -52,7 +53,7 @@ export default function ProductCard({ product }: { product: Product }) {
         </div>
         <div className="p-4 transition-opacity duration-300 group-hover:opacity-0">
           <h3 className="text-xs font-normal">{product.name}</h3>
-          <p className="text-xs text-gray-600">${product.price.toFixed(2)}</p>
+          <p className="text-xs text-gray-600">{formatCurrency(product.price)}</p>
         </div>
         <div className="absolute bottom-0 left-0 right-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
           <button
@@ -76,7 +77,7 @@ export default function ProductCard({ product }: { product: Product }) {
               <h2 className="text-2xl font-bold text-neutral-900 mb-2">{product.name}</h2>
               <p className="text-neutral-700 mb-2" style={{ whiteSpace: 'pre-line' }}>{product.description}</p>
               <div className="flex items-center justify-between mb-4">
-                <span className="font-bold text-xl text-neutral-900">{product.price}</span>
+                <span className="font-bold text-xl text-neutral-900">{formatCurrency(product.price)}</span>
                 <div className="flex items-center gap-2">
                   <button onClick={() => setModalQty(q => Math.max(1, q - 1))} className="px-2 py-1 rounded bg-neutral-200 text-lg dark:text-black">-</button>
                   <span className="px-3 py-1 text-base font-medium text-neutral-900 border rounded" style={{ borderColor: '#294A2D' }}>{modalQty}</span>

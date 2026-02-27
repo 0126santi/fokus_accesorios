@@ -7,6 +7,7 @@ import Image from 'next/image';
 import SearchBar from '@/components/SearchBar';
 import { fetchProducts, addProduct, deleteProduct, updateProduct } from '@/lib/productsApi';
 import { createSale, fetchSales, acceptSale, cancelSale, Sale, SaleItem } from '@/lib/salesApi';
+import { formatCurrency } from '@/lib/currency';
 import { supabase } from '@/lib/supabaseClient';
 import type { User } from '@supabase/supabase-js';
 
@@ -530,7 +531,7 @@ const handleLogout = async () => {
 								<li key={idx} className="flex items-center gap-4 py-2">
 									<span className="font-medium" title={it.name} style={{maxWidth: '220px', overflowX: 'auto', display: 'inline-block', whiteSpace: 'nowrap'}}>{it.name}</span>
 									<span style={{minWidth: '80px'}}>Cantidad: {it.cantidad}</span>
-									<span>Precio unitario: {it.precio.toFixed(2)}</span>
+									<span>Precio unitario: {formatCurrency(it.precio)}</span>
 									<button onClick={() => handleRemoveSaleItem(idx)} className="text-red-500 hover:underline">Eliminar</button>
 								</li>
 								))}
@@ -579,13 +580,13 @@ const handleLogout = async () => {
 														<li key={idx} className="grid grid-cols-6 gap-2 py-1 border-b last:border-b-0">
 															<span className="font-medium" title={it.name} style={{maxWidth: '220px', overflowX: 'auto', display: 'inline-block', whiteSpace: 'nowrap'}}>Nombre: {it.name}</span>
 															<span style={{minWidth: '80px'}}>Cantidad: {it.quantity}</span>
-															<span>Precio unitario: {it.price.toFixed(2)}</span>
+															<span>Precio unitario: {formatCurrency(it.price)}</span>
 														</li>
 												))}
 												</ul>
 												{/* Mostrar total y utilidad total */}
 												<div className="mt-2 text-right">
-													<div className="font-semibold">Total: {s.total.toFixed(2)}</div>
+													<div className="font-semibold">Total: {formatCurrency(s.total)}</div>
 												</div>
 									</div>
 								</li>

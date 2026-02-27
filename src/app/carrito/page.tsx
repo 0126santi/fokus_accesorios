@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from 'react';
 import { getCart, removeFromCart, updateCartQuantity, clearCart, CartItem } from '../../lib/cart';
+import { formatCurrency } from '../../lib/currency';
 import Image from 'next/image';
 
 export default function CarritoPage() {
@@ -51,7 +52,7 @@ export default function CarritoPage() {
                     </td>
                     {/* Desktop/tablet cells */}
                     <td className="hidden sm:table-cell font-semibold text-neutral-900 text-center align-middle px-2 py-2 whitespace-nowrap">
-                      <div className="mb-0">{item.price.toFixed(2)}</div>
+                      <div className="mb-0">{formatCurrency(item.price)}</div>
                     </td>
                     <td className="hidden sm:table-cell sm:align-middle align-top sm:py-0 py-2 sm:mb-0 mb-3">
                       <div className="block sm:inline mb-2 sm:mb-0">
@@ -63,19 +64,19 @@ export default function CarritoPage() {
                       </div>
                     </td>
                     <td className="hidden sm:table-cell font-semibold text-neutral-900 text-center align-middle px-2 py-2 whitespace-nowrap">
-                      <div className="mb-0">{(item.price * item.quantity).toFixed(2)}</div>
+                      <div className="mb-0">{formatCurrency(item.price * item.quantity)}</div>
                     </td>
 
                     {/* Mobile layout: price, qty, subtotal in a single row to avoid overlap */}
                     <td className="sm:hidden w-full py-2">
                       <div className="flex items-center justify-between w-full px-2">
-                        <div className="font-semibold text-neutral-900">{item.price.toFixed(2)}</div>
+                        <div className="font-semibold text-neutral-900">{formatCurrency(item.price)}</div>
                         <div className="flex items-center border rounded px-1" style={{ borderColor: '#294A2D', background: '#fff' }}>
                           <button onClick={() => handleQuantity(item.id, item.quantity - 1)} className="px-2 py-1 text-lg font-bold text-gray-700">-</button>
                           <span className="px-3 py-1 text-base font-medium text-neutral-900">{item.quantity}</span>
                           <button onClick={() => handleQuantity(item.id, item.quantity + 1)} className="px-2 py-1 text-lg font-bold text-gray-700">+</button>
                         </div>
-                        <div className="font-semibold text-neutral-900">{(item.price * item.quantity).toFixed(2)}</div>
+                        <div className="font-semibold text-neutral-900">{formatCurrency(item.price * item.quantity)}</div>
                       </div>
                     </td>
                   </tr>
@@ -100,12 +101,12 @@ export default function CarritoPage() {
             <h3 className="text-lg font-bold text-neutral-900 mb-2">TOTALES DEL CARRITO</h3>
             <div className="flex justify-between text-neutral-700 text-base">
               <span>Subtotal</span>
-              <span>{subtotal.toFixed(2)}</span>
+              <span>{formatCurrency(subtotal)}</span>
             </div>
             <hr />
             <div className="flex justify-between text-neutral-900 text-lg font-bold">
               <span>Total</span>
-              <span>{subtotal.toFixed(2)}</span>
+              <span>{formatCurrency(subtotal)}</span>
             </div>
             <button
               className="mt-4 px-6 py-3 rounded font-medium transition"
@@ -115,8 +116,8 @@ export default function CarritoPage() {
                 const numeroWhatsapp = '584243005733';
                 const mensaje = encodeURIComponent(
                   "Hola le escribo desde la pagina web, quiero comprar:\n" +
-                  cart.map(p => `- ${p.name} (${p.quantity} unidades) - ${ (p.price * p.quantity).toFixed(2) }`).join('\n') +
-                  `\nTotal: ${ subtotal.toFixed(2) }`
+                  cart.map(p => `- ${p.name} (${p.quantity} unidades) - ${formatCurrency(p.price * p.quantity)}`).join('\n') +
+                  `\nTotal: ${formatCurrency(subtotal)}`
                 );
                 window.open(`https://wa.me/${numeroWhatsapp}?text=${mensaje}`, '_blank');
               }}
