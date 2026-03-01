@@ -47,9 +47,9 @@ export default function CategoriaPage() {
       ) : productos.length === 0 ? (
         <p className="text-neutral-700 text-center">No hay productos en esta categoría.</p>
       ) : (
-        <div className="flex flex-wrap gap-4 px-2 sm:px-0 w-full sm:max-w-6xl mx-auto justify-center">
+        <div className="grid grid-cols-2 gap-2 px-2 w-full sm:max-w-6xl mx-auto sm:gap-4 sm:px-0 sm:grid-cols-3 lg:grid-cols-4">
           {productos.map((prod) => (
-            <div key={prod.id} className="w-[240px]">
+            <div key={prod.id} className="w-full max-w-[190px] mx-auto sm:max-w-none">
               <ProductCard product={prod} />
             </div>
           ))}

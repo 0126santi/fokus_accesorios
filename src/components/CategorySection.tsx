@@ -27,8 +27,8 @@ export default function CategorySection({ name, products, onShowOnly }: { name: 
         {Array.isArray(products) && products.map(prod => (
           <div
             key={prod.id}
-            className="flex-shrink-0"
-            style={{ width: '240px', scrollSnapAlign: 'center' }}
+            className="flex-shrink-0 w-[190px] sm:w-[240px]"
+            style={{ scrollSnapAlign: 'center' }}
           >
             <ProductCard product={prod} />
           </div>

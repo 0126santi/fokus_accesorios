@@ -252,7 +252,7 @@ export default function AdminPage() {
 						{showCrop && rawImage && (
 							<CropImage
 								image={rawImage}
-								aspect={5/3}
+								aspect={1}
 								onCropComplete={handleCropComplete}
 								onCancel={handleCropCancel}
 							/>

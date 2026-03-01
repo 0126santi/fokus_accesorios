@@ -3,6 +3,7 @@ import { Inter, Instrument_Sans } from 'next/font/google';
 import './globals.css';
 import Header from '../components/Header';
 import Navbar from '../components/Navbar';
+import WhatsAppFloat from '../components/WhatsAppFloat';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -28,6 +29,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Header />
         <Navbar />
         <main>{children}</main>
+        <WhatsAppFloat />
       </body>
     </html>
   );

@@ -4,28 +4,24 @@ import { addToCart } from '../lib/cart';
 import { formatCurrency } from '../lib/currency';
 import Image from 'next/image';
 import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import Portal from './Portal';
 
 export default function ProductCard({ product }: { product: Product }) {
-  const [added, setAdded] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [modalQty, setModalQty] = useState(1);
+  const router = useRouter();
 
   const handleAdd = () => {
     addToCart(product);
-    setAdded(true);
-    setTimeout(() => setAdded(false), 1200);
+    router.push('/carrito');
   };
 
   const handleModalAdd = () => {
     addToCart(product, modalQty);
-    setAdded(true);
-    // keep modal open briefly so user sees confirmation, then close
-    setTimeout(() => {
-      setAdded(false);
-      setShowModal(false);
-      setModalQty(1);
-    }, 1200);
+    setShowModal(false);
+    setModalQty(1);
+    router.push('/carrito');
   };
 
   useEffect(() => {
@@ -43,17 +39,23 @@ export default function ProductCard({ product }: { product: Product }) {
         id={`product-${product.id}`}
         className="group relative flex flex-col w-full bg-white overflow-hidden m-2 font-instrument"
       >
-        <div className="relative w-full aspect-square">
+        <button
+          type="button"
+          onClick={() => setShowModal(true)}
+          className="relative w-full aspect-square bg-neutral-50 cursor-pointer"
+          aria-label={`Ver detalle de ${product.name}`}
+        >
           <Image
             src={product.image}
             alt={product.name}
             layout="fill"
-            objectFit="cover"
+            objectFit="contain"
+            className="p-2"
           />
-        </div>
+        </button>
         <div className="p-4 transition-opacity duration-300 group-hover:opacity-0">
-          <h3 className="text-xs font-normal">{product.name}</h3>
-          <p className="text-xs text-gray-600">{formatCurrency(product.price)}</p>
+          <h3 className="text-sm font-normal leading-snug">{product.name}</h3>
+          <p className="text-sm font-bold text-gray-700">{formatCurrency(product.price)}</p>
         </div>
         <div className="absolute bottom-0 left-0 right-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
           <button
@@ -86,9 +88,9 @@ export default function ProductCard({ product }: { product: Product }) {
               </div>
               <button
                 onClick={e => { e.stopPropagation(); handleModalAdd(); }}
-                className={`w-full py-3 rounded font-medium transition ${added ? 'opacity-70' : ''}`}
+                className="w-full py-3 rounded font-medium transition"
                 style={{ background: '#000000', color: '#ffffff' }}
-              >{added ? 'Agregado' : 'Agregar al carrito'}</button>
+              >Agregar al carrito</button>
             </div>
           </div>
         </Portal>
