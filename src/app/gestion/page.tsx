@@ -9,6 +9,7 @@ import { fetchProducts, addProduct, deleteProduct, updateProduct } from '@/lib/p
 import { createSale, fetchSales, acceptSale, cancelSale, Sale, SaleItem } from '@/lib/salesApi';
 import { formatCurrency } from '@/lib/currency';
 import { supabase } from '@/lib/supabaseClient';
+import { lentesSubcategories } from '@/data/categories';
 import type { User } from '@supabase/supabase-js';
 
 export default function AdminPage() {
@@ -237,6 +238,19 @@ export default function AdminPage() {
 				<option value="aretes">Aretes</option>
 				<option value="sombreros">Sombreros</option>
 			</select>
+			{form.category === 'lentes' && (
+				<select
+					name="subcategory"
+					value={form.subcategory || ''}
+					onChange={handleInput}
+					className="w-full border rounded px-3 py-2 mb-2 bg-white dark:bg-neutral-700 text-neutral-900 dark:text-neutral-100"
+				>
+					<option value="">Selecciona subcategoría de lentes</option>
+					{lentesSubcategories.map((sub) => (
+						<option key={sub.key} value={sub.key}>{sub.name}</option>
+					))}
+				</select>
+			)}
 							<input
 							key={fileInputKey}
 							type="file"
@@ -294,7 +308,7 @@ export default function AdminPage() {
 							/>
 								<div className="flex-1">
 								<div className="font-semibold text-neutral-900 dark:text-neutral-100">{prod.name}</div>
-								<div className="text-neutral-700 dark:text-neutral-300 text-sm">{prod.category}</div>
+								<div className="text-neutral-700 dark:text-neutral-300 text-sm">{prod.category}{prod.subcategory ? ` · ${prod.subcategory}` : ''}</div>
 							</div>
 						<button onClick={() => handleDelete(prod.id)} className="ml-2 text-red-500 hover:underline" disabled={loading}>Eliminar</button>
 						</li>
@@ -331,6 +345,15 @@ export default function AdminPage() {
 				const parsed = Number(value);
 				const safe = Number.isNaN(parsed) ? undefined : Math.max(0, parsed);
 				setForm(f => ({ ...f, [name]: safe }));
+				return;
+			}
+
+			if (name === 'category') {
+				setForm(f => ({
+					...f,
+					category: value,
+					subcategory: value === 'lentes' ? f.subcategory : undefined,
+				}));
 				return;
 			}
 
@@ -390,6 +413,10 @@ export default function AdminPage() {
 							setError('Por favor completa todos los campos obligatorios: nombre, precio, categoría e imagen.');
 							return;
 						}
+						if (form.category === 'lentes' && !form.subcategory) {
+							setError('Para lentes, selecciona una subcategoría.');
+							return;
+						}
 						setLoading(true);
 						try {
 							const newProduct = await addProduct({
@@ -398,6 +425,7 @@ export default function AdminPage() {
 								price: Number(form.price),
 								image: preview,
 								category: form.category,
+								subcategory: form.category === 'lentes' ? form.subcategory : undefined,
 								user_id: user.id,
 							});
 							setProducts(ps => [...ps, newProduct]);

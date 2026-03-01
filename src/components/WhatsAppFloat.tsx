@@ -1,10 +1,10 @@
 import Image from 'next/image';
-import { WHATSAPP_NUMBER } from '@/lib/contact';
+import { WHATSAPP_URL } from '@/lib/contact';
 
 export default function WhatsAppFloat() {
   return (
     <a
-      href={`https://wa.me/${WHATSAPP_NUMBER}`}
+      href={WHATSAPP_URL}
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Abrir chat de WhatsApp"

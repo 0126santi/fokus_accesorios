@@ -10,6 +10,7 @@ export type Product = {
   costo?: number;
   image: string;
   category: string;
+  subcategory?: string;
   user_id?: string;
   soldOut?: boolean;
 };

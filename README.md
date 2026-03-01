@@ -52,6 +52,12 @@ Variables de entorno
 
 Notas de datos y orden manual
 - La tabla `products` necesita la columna `position integer` para persistir el orden.
+- Para subcategorías (ej. lentes), la tabla `products` necesita la columna opcional `subcategory text`.
+- Si no existe, créala con SQL:
+```sql
+ALTER TABLE products
+ADD COLUMN IF NOT EXISTS subcategory text;
+```
 - Inicializa posiciones con SQL (ejemplo por `id` desc):
 ```sql
 WITH numbered AS (

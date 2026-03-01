@@ -36,7 +36,8 @@ export default function SearchBar({ value, onChange, onSelect, autoFocus }: { va
       onSelect(product);
     }
     // Redirige a la categoría y desplaza al producto
-    router.push(`/categoria/${product.category}#product-${product.id}`);
+    const subQuery = product.subcategory ? `?sub=${encodeURIComponent(product.subcategory)}` : '';
+    router.push(`/categoria/${product.category}${subQuery}#product-${product.id}`);
   };
 
   return (
