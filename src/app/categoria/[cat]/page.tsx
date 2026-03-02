@@ -7,7 +7,12 @@ import ProductCard from '@/components/ProductCard';
 import { fetchProducts } from '@/lib/productsApi';
 import { Product } from '@/data/products';
 
-export default function CategoriaPage() {
+type CategoriaPageProps = {
+  params: { cat: string };
+  searchParams?: { sub?: string };
+};
+
+export default function CategoriaPage(_: CategoriaPageProps) {
   const params = useParams<{ cat: string }>();
   const searchParams = useSearchParams();
   const cat = params?.cat ?? '';
